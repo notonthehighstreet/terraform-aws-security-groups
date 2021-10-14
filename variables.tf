@@ -1,15 +1,9 @@
-variable "name" {
-}
-
-variable "description" {
-}
-
-variable "vpc_id" {
-}
-
-variable "ingress_rule" {
-  type    = list(any)
-  default = []
+variable "security_group" {
+ type = object({
+   name = string
+   description = string
+   vpc_id = string
+ })
 }
 
 variable "allow_rules" {
@@ -23,45 +17,9 @@ variable "allow_rules" {
   })))
 }
 
-variable "egress_rule" {
-  type        = list(any)
-  default     = []
-  description = "This takes 3 values: from_port, to_port, protocol, these are then individually fed into sg rule"
-}
-
-variable "ingress_source_sg" {
-  type    = string
-  default = ""
-}
-
-variable "egress_source_sg" {
-  type    = string
-  default = ""
-}
-
-variable "ingress_cidr_blocks" {
-  type    = list(any)
-  default = []
-}
-
-variable "ingress_prefix_list_ids" {
-  type    = list(any)
-  default = []
-}
-
-variable "egress_cidr_blocks" {
-  type    = list(any)
-  default = []
-}
-
 variable "egress_prefix_list_ids" {
   type    = list(any)
   default = []
-}
-
-variable "egress_allow_all" {
-  default     = false
-  description = "If enabled, a default allow all egress rule is also added. allowing all traffic out"
 }
 
 variable "enable_self" {
@@ -73,8 +31,3 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
-
-variable "sg_id" {
-  default = ""
-}
-

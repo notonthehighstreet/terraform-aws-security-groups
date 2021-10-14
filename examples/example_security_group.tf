@@ -29,11 +29,17 @@ variable "cidr_list" {
 variable "global_cidr_list" {
 }
 
-module "example_security_group" {
-  source      = "../"
+
+variable "security_group_details" {
   name        = "example_access"
   description = "Example Access to SSH and HTTPS"
   vpc_id      = aws_vpc.mgmt.id
+}
+
+
+module "example_security_group" {
+  source      = "../"
+  security_group = var.security_group_details
 
   allow_rules = {
     ingress_rules = [
